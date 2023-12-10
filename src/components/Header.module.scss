@@ -1,5 +1,9 @@
 .header {
-  background: #333;
-  padding: 2rem 0;
+  background: var(--gray-800);
+  padding: 1.25rem 0;
   text-align: center;
+
+  img {
+    height: 2rem;
+  }
 }
