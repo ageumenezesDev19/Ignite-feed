@@ -1,7 +1,7 @@
 import './global.scss'
 import styles from './App.module.scss';
 import { Header } from './components/Header'
-import { Post } from './Post';
+import { Post } from './components/Post';
 import { Sidebar } from './components/Sidebar';
 
 export  function App() {
