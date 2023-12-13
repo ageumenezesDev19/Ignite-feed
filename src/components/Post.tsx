@@ -4,7 +4,7 @@ import styles from './Post.module.scss';
 
 interface PostProps {
   author: string;
-  content: string
+  job: string
 }
 
 export function Post(props: PostProps) {
@@ -14,8 +14,8 @@ export function Post(props: PostProps) {
         <div className={styles.author}>
           <Avatar img={profileImg} />
           <div>
-            <strong>Ageu Menezes</strong>
-            <span>Web Developer</span>
+            <strong>{props.author}</strong>
+            <span>{props.job}</span>
           </div>
         </div>
         <time
@@ -30,7 +30,7 @@ export function Post(props: PostProps) {
         <p>Fala galeraa 👋</p>
         <p>Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat.
           O nome do projeto é DoctorCare 🚀</p>
-        <p>👉 jane.design/doctorcare</p>
+        <p>👉 <a href="#">jane.design/doctorcare</a></p>
         <p><a href="">#novoprojeto</a> <a href="">#nlw</a> <a href="">#rocketseat</a></p>
       </div>
     </article>
