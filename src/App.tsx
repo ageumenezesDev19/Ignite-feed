@@ -1,7 +1,7 @@
 import './global.scss'
 import styles from './App.module.scss';
 import { Header } from './components/Header'
-import { Post } from './Post';
+import { Post } from './components/Post';
 import { Sidebar } from './components/Sidebar';
 
 export  function App() {
@@ -15,11 +15,11 @@ export  function App() {
         <main>
           <Post
             author='Ageu Menezes'
-            content='Lorem ipsum, dolor sit amet consectetur adipisicing elit.'
+            job='Web Developer'
           />
           <Post
             author='Lucas Ferreira'
-            content='Lorem ipsum, adipisicing elit.'
+            job='Mobile Developer'
           />
         </main>
       </div>
