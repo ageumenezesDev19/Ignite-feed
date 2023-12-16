@@ -1,6 +1,7 @@
  import { Avatar } from './Avatar';
 import profileImg from '../assets/IMG_0013.jpeg';
 import styles from './Post.module.scss';
+import { Comment } from './Comment';
 
 interface PostProps {
   author: string;
@@ -45,6 +46,12 @@ export function Post(props: PostProps) {
           <button type="submit">Comentar</button>
         </footer>
       </form>
+
+      <div className={styles.commentList}>
+        <Comment />
+        <Comment />
+        <Comment />
+      </div>
     </article>
   )
 }
