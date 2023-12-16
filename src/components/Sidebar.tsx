@@ -13,7 +13,7 @@ export function Sidebar() {
           src={backgroundImg}
         />
         <div className={styles.profile}>
-          <Avatar img={profileImg} />
+          <Avatar img={profileImg} hasBorder={true} />
           <strong>Ageu Menezes</strong>
           <span>Web Developer</span>
 
