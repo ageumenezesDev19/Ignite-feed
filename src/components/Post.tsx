@@ -13,7 +13,7 @@ export function Post(props: PostProps) {
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar img={profileImg} />
+          <Avatar img={profileImg} hasBorder={true} />
           <div>
             <strong>{props.author}</strong>
             <span>{props.job}</span>
