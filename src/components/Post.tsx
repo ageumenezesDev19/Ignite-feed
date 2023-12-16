@@ -1,27 +1,32 @@
- import { Avatar } from './Avatar';
-import profileImg from '../assets/IMG_0013.jpeg';
+import { Avatar } from './Avatar';
 import styles from './Post.module.scss';
 import { Comment } from './Comment';
 
 interface PostProps {
-  author: string;
-  job: string
+  author: {
+    name: string;
+    avatarUrl: string;
+    role: string;
+  }
+  content: object;
+  key: number;
+  publishedAt: object;
 }
 
-export function Post(props: PostProps) {
+export function Post({author, content, publishedAt}: PostProps) {
   return(
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar img={profileImg} hasBorder={true} />
+          <Avatar img={author.avatarUrl} hasBorder={true} />
           <div>
-            <strong>{props.author}</strong>
-            <span>{props.job}</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
         <time
           title='11 de maio as 08:13'
-          dateTime="2022-05-11 08:13:30"
+          dateTime={`${publishedAt}`}
         >
           Publicado à 1h
         </time>
