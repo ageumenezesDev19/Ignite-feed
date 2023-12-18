@@ -36,12 +36,22 @@ export function Post({author, content, publishedAt}: PostProps) {
   function handleCreateNewComment() {
     event?.preventDefault();
 
-    setComments([...comments,newCommentText]);
-    setNewCommentText('');
+    if (newCommentText.trim() !== '') {
+      setComments([...comments,newCommentText]);
+      setNewCommentText('');
+    }
   }
 
   function handleNewCommentChange({target}: React.ChangeEvent<HTMLTextAreaElement>) {
     setNewCommentText(target.value);
+  }
+
+  function deleteComment(findComment: string) {
+    const deleteTheComment = comments.filter(
+      comment => comment !== findComment
+      );
+
+    setComments(deleteTheComment);
   }
 
   return(
@@ -92,7 +102,13 @@ export function Post({author, content, publishedAt}: PostProps) {
 
       <div className={styles.commentList}>
         {comments.map((comment) => {
-          return <Comment key={comment} content={comment} />
+          return(
+            <Comment
+              key={comment}
+              content={comment}
+              onDeleteComment={deleteComment}
+            />
+          )
         })}
       </div>
     </article>
