@@ -33,11 +33,10 @@ export function Post({author, content, publishedAt}: PostProps) {
     addSuffix: true
   })
 
-  function handleCreateNewComment() {
-    event?.preventDefault();
-
+  function handleCreateNewComment(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     if (newCommentText.trim() !== '') {
-      setComments([...comments,newCommentText]);
+      setComments([...comments, newCommentText]);
       setNewCommentText('');
     }
   }
@@ -47,9 +46,9 @@ export function Post({author, content, publishedAt}: PostProps) {
     setNewCommentText(target.value);
   }
 
-  function handleNewCommentInvalid({target}: React.ChangeEvent<HTMLTextAreaElement>) {
-    target.setCustomValidity('Este campo é obrigatório!')
-  }
+  function handleNewCommentInvalid(event: React.ChangeEvent<HTMLTextAreaElement>) {
+    event.target.setCustomValidity('Este campo é obrigatório!');
+  }  
 
   function deleteComment(findComment: string) {
     const deleteTheComment = comments.filter(
