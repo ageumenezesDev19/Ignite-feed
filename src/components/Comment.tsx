@@ -3,7 +3,11 @@ import profileImg from "../assets/IMG_0013.jpeg";
 import { Avatar } from "./Avatar";
 import styles from "./Comment.module.scss";
 
-export function Comment() {
+interface CommentProps {
+  content: string;
+}
+
+export function Comment({content}: CommentProps) {
   return (
     <div className={styles.comment}>
       <Avatar img={profileImg} hasBorder={false} />
@@ -25,7 +29,7 @@ export function Comment() {
               <Trash size={24} />
             </button>
           </header>
-          <p>Muito bom Devon, parabéns!! 👏👏</p>
+          <p>{content}</p>
         </div>
 
         <footer>
