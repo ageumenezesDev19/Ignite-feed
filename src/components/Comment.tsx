@@ -10,7 +10,7 @@ interface CommentProps {
 }
 
 export function Comment({content, onDeleteComment}: CommentProps) {
-  const [likeCount, setLinkCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(0);
 
   function handleDeleteComment() {
 
@@ -18,7 +18,9 @@ export function Comment({content, onDeleteComment}: CommentProps) {
   }
 
   function handleLikeComment() {
-    setLinkCount(likeCount + 1);
+    setLikeCount((state) => {
+      return state + 1;
+    });
   }
 
   return (
@@ -46,7 +48,10 @@ export function Comment({content, onDeleteComment}: CommentProps) {
         </div>
 
         <footer>
-          <button onClick={handleLikeComment}>
+          <button
+            onClick={handleLikeComment}
+            aria-label={`Aplaudir - ${likeCount} curtidas`}
+          >
             <ThumbsUp />
             Aplaudir <span>{likeCount}</span>
           </button>
