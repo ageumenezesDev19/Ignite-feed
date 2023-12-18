@@ -1,3 +1,5 @@
+import * as dateFns from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 import { Avatar } from './Avatar';
 import styles from './Post.module.scss';
 import { Comment } from './Comment';
@@ -8,12 +10,23 @@ interface PostProps {
     avatarUrl: string;
     role: string;
   }
-  content: object;
+  content: { type: string; content: string }[];
   key: number;
-  publishedAt: object;
+  publishedAt: Date;
 }
 
-export function Post({author, content, publishedAt}: PostProps) {
+export function Post({author, content, publishedAt, key}: PostProps) {
+  const publishedDateFormatted = dateFns.format((publishedAt), "d 'de' LLLL 'às' HH:mm'h'", {
+    // @ts-expect-error: Suppress TypeScript error
+    locale: ptBR,
+  });
+
+  const publishedDateRelativeToNow = dateFns.formatDistanceToNow(publishedAt, {
+    // @ts-expect-error: Suppress TypeScript error
+    locale: ptBR,
+    addSuffix: true
+  })
+
   return(
     <article className={styles.post}>
       <header>
@@ -25,19 +38,21 @@ export function Post({author, content, publishedAt}: PostProps) {
           </div>
         </div>
         <time
-          title='11 de maio as 08:13'
-          dateTime={`${publishedAt}`}
+          title={publishedDateFormatted}
+          dateTime={publishedAt.toISOString()}
         >
-          Publicado à 1h
+          {publishedDateRelativeToNow}
         </time>
       </header>
 
       <div className={styles.content}>
-        <p>Fala galeraa 👋</p>
-        <p>Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Reactjs, evento da Rocketseat.
-          O nome do projeto é Move.it 🚀</p>
-        <p>👉 <a href="#">ageu.dev/move.it</a></p>
-        <p><a href="">#novoprojeto</a> <a href="">#nlw</a> <a href="">#rocketseat</a></p>
+        {content.map(line => {
+          if (line.type === 'paragraph') {
+            return <p key={key}>{line.content}</p>
+          } else if (line.type === 'link') {
+            return <p key={key}><a href="#">{line.content}</a></p>
+          }
+        })}
       </div>
 
       <form className={styles.commentForm}>
