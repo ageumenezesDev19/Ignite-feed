@@ -82,15 +82,16 @@
     margin-top: 1rem;
   }
 
-  footer {
-    visibility: hidden;
-    max-height: 0;
-  }
+  //This cause a bug on Apple devices (Safari and iPhone Browsers):
+  // footer {
+  //   visibility: hidden;
+  //   max-height: 0;
+  // }
 
-  &:focus-within footer {
-    visibility: visible;
-    max-height: none;
-  }
+  // &:focus-within footer {
+  //   visibility: visible;
+  //   max-height: none;
+  // }
 
   button {
     padding: 1rem 1.5rem;
@@ -110,7 +111,7 @@
 
     &:disabled {
       opacity: 0.7;
-      cursor: not-allowed;
+      // cursor: not-allowed;
     }
   }
 
