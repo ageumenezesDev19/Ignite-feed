@@ -18,7 +18,9 @@ export function Comment({content, onDeleteComment}: CommentProps) {
   }
 
   function handleLikeComment() {
-    setLinkCount(likeCount + 1);
+    setLinkCount((state) => {
+      return state + 1;
+    });
   }
 
   return (
