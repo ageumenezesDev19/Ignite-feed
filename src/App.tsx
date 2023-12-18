@@ -28,9 +28,9 @@ const posts = [
       role: 'Educator'
     },
     content: [
-      {type: 'paragraph', content: 'Fala galeraa 👋'},
-      {type: 'paragraph', content: 'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Reactjs, evento da Rocketseat.'},
-      {type: 'paragraph', content: 'O nome do projeto é Move.it 🚀'},
+      {type: 'paragraph', content: '"Hey, folks! 👋'},
+      {type: 'paragraph', content: "I just uploaded another project to my portfolio. It's a project I did during the NLW Reactjs, an event by Rocketseat."},
+      {type: 'paragraph', content: 'The project name is called Move.it 🚀'},
       {type: 'link', content: '👉 ageu.dev/move.it'},
     ],
     publishedAt: new Date('2023-11-10 20:00:00')
