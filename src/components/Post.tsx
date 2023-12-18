@@ -3,6 +3,7 @@ import ptBR from 'date-fns/locale/pt-BR';
 import { Avatar } from './Avatar';
 import styles from './Post.module.scss';
 import { Comment } from './Comment';
+import { useState } from 'react';
 
 interface PostProps {
   author: {
@@ -11,11 +12,16 @@ interface PostProps {
     role: string;
   }
   content: { type: string; content: string }[];
-  key: number;
   publishedAt: Date;
 }
 
-export function Post({author, content, publishedAt, key}: PostProps) {
+export function Post({author, content, publishedAt}: PostProps) {
+  const [comments, setComments] = useState([
+    'Post muito bacana, hein?!'
+  ])
+
+  const [newCommentText, setNewCommentText] = useState('');
+
   const publishedDateFormatted = dateFns.format((publishedAt), "d 'de' LLLL 'às' HH:mm'h'", {
     // @ts-expect-error: Suppress TypeScript error
     locale: ptBR,
@@ -26,6 +32,27 @@ export function Post({author, content, publishedAt, key}: PostProps) {
     locale: ptBR,
     addSuffix: true
   })
+
+  function handleCreateNewComment() {
+    event?.preventDefault();
+
+    if (newCommentText.trim() !== '') {
+      setComments([...comments,newCommentText]);
+      setNewCommentText('');
+    }
+  }
+
+  function handleNewCommentChange({target}: React.ChangeEvent<HTMLTextAreaElement>) {
+    setNewCommentText(target.value);
+  }
+
+  function deleteComment(findComment: string) {
+    const deleteTheComment = comments.filter(
+      comment => comment !== findComment
+      );
+
+    setComments(deleteTheComment);
+  }
 
   return(
     <article className={styles.post}>
@@ -46,20 +73,26 @@ export function Post({author, content, publishedAt, key}: PostProps) {
       </header>
 
       <div className={styles.content}>
-        {content.map(line => {
+        {content.map((line) => {
           if (line.type === 'paragraph') {
-            return <p key={key}>{line.content}</p>
+            return <p key={line.content}>{line.content}</p>
           } else if (line.type === 'link') {
-            return <p key={key}><a href="#">{line.content}</a></p>
+            return <p key={line.content}><a href="#">{line.content}</a></p>
           }
         })}
       </div>
 
-      <form className={styles.commentForm}>
+      <form
+        onSubmit={handleCreateNewComment}
+        className={styles.commentForm}
+      >
         <strong>Deixe seu feedback</strong>
 
         <textarea
+          name='comment'
+          value={newCommentText}
           placeholder='Deixe um comentário'
+          onChange={handleNewCommentChange}
         />
 
         <footer>
@@ -68,9 +101,15 @@ export function Post({author, content, publishedAt, key}: PostProps) {
       </form>
 
       <div className={styles.commentList}>
-        <Comment />
-        <Comment />
-        <Comment />
+        {comments.map((comment) => {
+          return(
+            <Comment
+              key={comment}
+              content={comment}
+              onDeleteComment={deleteComment}
+            />
+          )
+        })}
       </div>
     </article>
   )
