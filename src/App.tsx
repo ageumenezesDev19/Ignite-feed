@@ -18,7 +18,7 @@ const posts = [
       {type: 'paragraph', content: 'O nome do projeto é Move.it 🚀'},
       {type: 'link', content: '👉 ageu.dev/move.it'},
     ],
-    publishedAt: new Date('2023-05-03 20:00:00')
+    publishedAt: new Date('2023-10-13 20:00:00')
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ const posts = [
       {type: 'paragraph', content: 'O nome do projeto é Move.it 🚀'},
       {type: 'link', content: '👉 ageu.dev/move.it'},
     ],
-    publishedAt: new Date('2023-05-10 20:00:00')
+    publishedAt: new Date('2023-11-10 20:00:00')
   }
 ];
 
