@@ -3,7 +3,7 @@ import ptBR from 'date-fns/locale/pt-BR';
 import { Avatar } from './Avatar';
 import styles from './Post.module.scss';
 import { Comment } from './Comment';
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 interface PostProps {
   author: {
@@ -11,7 +11,10 @@ interface PostProps {
     avatarUrl: string;
     role: string;
   }
-  content: { type: string; content: string }[];
+  content: {
+    type: string;
+    content: string
+  }[];
   publishedAt: Date;
 }
 
@@ -33,7 +36,7 @@ export function Post({author, content, publishedAt}: PostProps) {
     addSuffix: true
   })
 
-  function handleCreateNewComment(event: React.FormEvent<HTMLFormElement>) {
+  function handleCreateNewComment(event: FormEvent) {
     event.preventDefault();
     if (newCommentText.trim() !== '') {
       setComments([...comments, newCommentText]);
@@ -41,14 +44,14 @@ export function Post({author, content, publishedAt}: PostProps) {
     }
   }
 
-  function handleNewCommentChange({target}: React.ChangeEvent<HTMLTextAreaElement>) {
+  function handleNewCommentChange({target}: ChangeEvent<HTMLTextAreaElement>) {
     target.setCustomValidity('');
     setNewCommentText(target.value);
   }
 
-  function handleNewCommentInvalid(event: React.ChangeEvent<HTMLTextAreaElement>) {
-    event.target.setCustomValidity('Este campo é obrigatório!');
-  }  
+  function handleNewCommentInvalid({target}: ChangeEvent<HTMLTextAreaElement>) {
+    target.setCustomValidity('Este campo é obrigatório!');
+  }
 
   function deleteComment(findComment: string) {
     const deleteTheComment = comments.filter(
@@ -64,7 +67,7 @@ export function Post({author, content, publishedAt}: PostProps) {
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar img={author.avatarUrl} hasBorder={true} />
+          <Avatar img={author.avatarUrl} hasBorder={true} alt="" />
           <div>
             <strong>{author.name}</strong>
             <span>{author.role}</span>
